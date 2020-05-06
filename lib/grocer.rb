@@ -20,17 +20,24 @@ end
 find_item_by_name_in_collection("CANNED CORN", grocery_shelf )
 find_item_by_name_in_collection("Dog Food", grocery_shelf )
 
+unconsolidated_cart = [
+  {:item => "AVOCADO", :price => 3.00, :clearance => true },
+  {:item => "AVOCADO", :price => 3.00, :clearance => true },
+  {:item => "KALE", :price => 3.00, :clearance => false}
+]
+
+
 
 def consolidate_cart(cart)
   index = 0
   new_cart = []
   
   cart.each do |grocery_shelf|
-    current_item = find_item_by_name_in_collection(grocery_shelf[:item], new_cart)
-    if current_item
+    unconsolidated_cart = find_item_by_name_in_collection(grocery_shelf[:item], new_cart)
+    if unconsolidated_cart
       new_cart_index = 0
       new_cart.each do |new_cart_item|
-        if new_cart_item[:item] === current_item[:item]
+        if new_cart_item[:item] === unconsolidated_cart[:item]
           new_cart_item[:count] += 1
         end
         new_cart_index += 1
