@@ -1,17 +1,55 @@
-def find_item_by_name_in_collection(name, collection)
-  # Implement me first!
-  #
-  # Consult README for inputs and outputs
+grocery_shelf = [
+  { :item => "CANNED BEANS", :price => 3.00, :clearance => true },
+  { :item => "CANNED CORN", :price => 2.50, :clearance => false },
+  { :item => "SALSA", :price => 1.50, :clearance => false },
+  { :item => "TORTILLAS", :price => 2.00, :clearance => false },
+  { :item => "HOT SAUCE", :price => 1.75, :clearance => false }
+]
 
+
+def find_item_by_name_in_collection(name, collection)
+  result = nil
+  collection.each do |grocery_shelf|
+    if grocery_shelf[:item] == name
+      result = grocery_shelf
+    end
+  end
+  result
 end
+
+find_item_by_name_in_collection("CANNED CORN", grocery_shelf )
+find_item_by_name_in_collection("Dog Food", grocery_shelf )
+
+unconsolidated_cart = [
+  {:item => "AVOCADO", :price => 3.00, :clearance => true },
+  {:item => "AVOCADO", :price => 3.00, :clearance => true },
+  {:item => "KALE", :price => 3.00, :clearance => false}
+]
+
+
 
 def consolidate_cart(cart)
-  # Consult README for inputs and outputs
-  #
-  # REMEMBER: This returns a new Array that represents the cart. Don't merely
-  # change `cart` (i.e. mutate) it. It's easier to return a new thing.
-
-end
+  index = 0
+  new_cart = []
+  
+  cart.each do |grocery_shelf|
+    unconsolidated_cart = find_item_by_name_in_collection(grocery_shelf[:item], new_cart)
+    if unconsolidated_cart
+      new_cart_index = 0
+      new_cart.each do |new_cart_item|
+        if new_cart_item[:item] === unconsolidated_cart[:item]
+          new_cart_item[:count] += 1
+        end
+        new_cart_index += 1
+      end
+    else
+      grocery_shelf[:count] = 1
+      new_cart << grocery_shelf
+    end
+    index += 1
+  end
+  new_cart
+end 
 
 
   
